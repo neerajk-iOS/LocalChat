@@ -1,0 +1,40 @@
+services:
+  localchat:
+    build: .
+    image: localchat:latest
+    container_name: localchat
+    restart: unless-stopped
+
+    ports:
+      - "3700:3700"   # HTTP  — main app, admin dashboard
+      - "3743:3743"   # HTTPS — WebRTC audio/video calls
+
+    volumes:
+      # Database — persists all users, messages, groups, reactions
+      - localchat-db:/app/server/localchat.db
+      # Uploaded files — avatars, shared media
+      - localchat-uploads:/app/server/uploads
+      # TLS cert cache — avoids regenerating on every restart
+      - localchat-certs:/app/cert-cache
+
+    environment:
+      - NODE_ENV=production
+      - CERT_DIR=/app/cert-cache
+      # Override ports if needed:
+      # - PORT=3700
+      # - HTTPS_PORT=3743
+
+    # Needed for mDNS (LAN auto-discovery) to broadcast on the host network.
+    # Remove this line if you don't need auto-discovery; the app still works.
+    network_mode: host
+
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3700/api/users"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  localchat-db:
+  localchat-uploads:
+  localchat-certs:

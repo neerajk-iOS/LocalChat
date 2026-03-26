@@ -1,0 +1,26 @@
+# Dev dependencies and build artifacts
+node_modules
+**/node_modules
+client/dist
+**/.DS_Store
+
+# Database and generated certs (mounted as volumes at runtime)
+server/localchat.db
+server/localchat.db-shm
+server/localchat.db-wal
+server/*.pem
+server/*.crt
+server/cert.meta.json
+
+# Uploaded files (mounted as volume at runtime)
+server/uploads
+
+# Git and editor
+.git
+.gitignore
+.cursor
+*.md
+
+# Dev-only files
+client/vite.config.js.timestamp*
+**/*.log

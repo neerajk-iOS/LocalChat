@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build outputs
+client/dist/
+dist-electron/
+
+# Database & runtime data
+server/localchat.db
+server/localchat.db-shm
+server/localchat.db-wal
+
+# TLS certs (auto-generated on startup)
+server/cert.pem
+server/key.pem
+server/cert.meta.json
+
+# Uploads (user content)
+server/uploads/
+
+# Env & secrets
+.env
+.env.*
+
+# OS & editor
+.DS_Store
+Thumbs.db
+.cursor/
+*.log
+
+# Docker export archives
+*.tar.gz
+*.tar
