@@ -4,6 +4,11 @@
   "description": "LocalChat — cross-platform desktop app",
   "main": "main.js",
   "private": true,
+  "homepage": "https://github.com/neerajk-iOS/LocalChat",
+  "author": {
+    "name": "Neeraj Kumar",
+    "email": "neerajk@localchat.app"
+  },
   "scripts": {
     "start": "electron .",
     "pack:mac": "electron-builder --mac",
