@@ -1,0 +1,59 @@
+{
+  "expo": {
+    "name": "LocalChat",
+    "slug": "localchat",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "scheme": "localchat",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0F172A"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.localchat.app",
+      "infoPlist": {
+        "NSCameraUsageDescription": "LocalChat uses your camera to take photos for messages and your profile.",
+        "NSMicrophoneUsageDescription": "LocalChat uses your microphone for voice and video calls.",
+        "NSPhotoLibraryUsageDescription": "LocalChat accesses your photo library to send images in chat.",
+        "NSPhotoLibraryAddUsageDescription": "LocalChat saves received photos to your library.",
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true
+        }
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0F172A"
+      },
+      "package": "com.localchat.app",
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.VIBRATE"
+      ]
+    },
+    "plugins": [
+      "expo-secure-store",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "LocalChat accesses your photo library to send images in chat.",
+          "cameraPermission": "LocalChat uses your camera to take photos for messages and your profile.",
+          "microphonePermission": "LocalChat uses your microphone for voice and video calls."
+        }
+      ],
+      "expo-document-picker",
+      "expo-font"
+    ],
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}

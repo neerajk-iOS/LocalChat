@@ -1,10 +1,10 @@
 {
   "name": "localchat",
-  "version": "1.0.0",
-  "description": "LocalChat — self-hosted LAN chat with voice/video calls",
+  "version": "2.0.0",
+  "description": "LocalChat — self-hosted chat with voice/video calls",
   "private": true,
   "scripts": {
-    "install:all": "cd server && npm install && cd ../client && npm install && cd ../electron && npm install",
+    "install:all": "cd server && npm install && cd ../client && npm install && cd ../mobile && npm install",
     "build": "cd client && npm run build",
     "start": "node server/index.js",
     "dev:server": "cd server && npx nodemon index.js",
@@ -13,12 +13,6 @@
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down",
     "docker:logs": "docker compose logs -f",
-    "docker:rebuild": "docker compose down && docker build --no-cache -t localchat . && docker compose up -d",
-    "desktop": "cd electron && npm start",
-    "desktop:install": "cd electron && npm install",
-    "desktop:pack:mac": "cd client && npm run build && cd ../electron && npm run pack:mac",
-    "desktop:pack:win": "cd client && npm run build && cd ../electron && npm run pack:win",
-    "desktop:pack:linux": "cd client && npm run build && cd ../electron && npm run pack:linux",
-    "desktop:pack:all": "cd client && npm run build && cd ../electron && npm run pack:all"
+    "docker:rebuild": "docker compose down && docker build --no-cache -t localchat . && docker compose up -d"
   }
 }

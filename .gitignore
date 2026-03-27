@@ -1,34 +1,71 @@
-# Dependencies
+# ── Dependencies ──────────────────────────────────────────
 node_modules/
 **/node_modules/
 
-# Build outputs
+# ── Build outputs ─────────────────────────────────────────
 client/dist/
-dist-electron/
+mobile/.expo/
+mobile/dist/
 
-# Database & runtime data
+# ── Database & runtime data ───────────────────────────────
 server/localchat.db
 server/localchat.db-shm
 server/localchat.db-wal
+*.db
+*.db-shm
+*.db-wal
 
-# TLS certs (auto-generated on startup)
+# ── TLS certificates (auto-generated on startup) ──────────
 server/cert.pem
 server/key.pem
 server/cert.meta.json
+*.pem
+*.crt
+*.key
+*.p12
+*.pfx
 
-# Uploads (user content)
-server/uploads/
-
-# Env & secrets
+# ── Secrets & environment variables ──────────────────────
 .env
 .env.*
+!.env.example
+*.secret
+secrets/
+jwt_secret*
 
-# OS & editor
+# ── Uploads (user content — never commit) ────────────────
+server/uploads/
+
+# ── Mobile app sensitive / generated ─────────────────────
+mobile/google-services.json
+mobile/GoogleService-Info.plist
+mobile/android/app/google-services.json
+mobile/ios/GoogleService-Info.plist
+mobile/eas.json
+*.keystore
+*.jks
+mobile/android/app/*.keystore
+
+# ── OS & editor ───────────────────────────────────────────
 .DS_Store
+.DS_Store?
+._*
 Thumbs.db
+ehthumbs.db
+desktop.ini
 .cursor/
+.vscode/settings.json
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Docker export archives
+# ── Docker export archives ────────────────────────────────
 *.tar.gz
 *.tar
+
+# ── Tunnel / deployment config ────────────────────────────
+.cloudflared/
+cloudflared-config.yml
+ngrok.yml
+*.ngrok*

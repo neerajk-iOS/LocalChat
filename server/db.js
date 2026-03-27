@@ -92,20 +92,33 @@ db.exec(`
   );
 `);
 
-// Safe column additions (ALTER TABLE IF NOT EXISTS column requires SQLite 3.37+;
-// use try/catch for older versions)
+// Safe column additions
 for (const sql of [
-  `ALTER TABLE users ADD COLUMN is_banned   INTEGER DEFAULT 0`,
-  `ALTER TABLE users ADD COLUMN ban_reason  TEXT`,
-  `ALTER TABLE users ADD COLUMN ip_address  TEXT`,
-  `ALTER TABLE users ADD COLUMN email       TEXT`,
+  `ALTER TABLE users ADD COLUMN is_banned     INTEGER DEFAULT 0`,
+  `ALTER TABLE users ADD COLUMN ban_reason    TEXT`,
+  `ALTER TABLE users ADD COLUMN ip_address    TEXT`,
+  `ALTER TABLE users ADD COLUMN email         TEXT`,
+  `ALTER TABLE users ADD COLUMN password_hash TEXT`,
 ]) {
   try { db.exec(sql); } catch { /* column already exists */ }
 }
 
-// Unique index on email (ignore if already exists)
+// Unique index on email
 try {
   db.exec(`CREATE UNIQUE INDEX IF NOT EXISTS idx_users_email ON users(email) WHERE email IS NOT NULL`);
 } catch { /* already exists */ }
+
+// Refresh tokens table for JWT rotation
+db.exec(`
+  CREATE TABLE IF NOT EXISTS refresh_tokens (
+    id         TEXT PRIMARY KEY,
+    user_id    TEXT NOT NULL,
+    token_hash TEXT NOT NULL UNIQUE,
+    expires_at INTEGER NOT NULL,
+    created_at INTEGER NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+  );
+  CREATE INDEX IF NOT EXISTS idx_refresh_tokens_user ON refresh_tokens(user_id);
+`);
 
 module.exports = db;

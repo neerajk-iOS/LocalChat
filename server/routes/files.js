@@ -3,9 +3,10 @@ const router = express.Router();
 const path = require('path');
 const fs = require('fs');
 const { upload, UPLOADS_DIR, FILES_DIR, AVATARS_DIR } = require('../middleware/upload');
+const { requireAuth } = require('../middleware/auth');
 
 // POST upload a file (chat attachments — field name must be 'file')
-router.post('/upload', upload.single('file'), (req, res) => {
+router.post('/upload', requireAuth, upload.single('file'), (req, res) => {
   if (!req.file) return res.status(400).json({ error: 'No file provided' });
 
   // Chat uploads always go to /uploads/files/ — fieldname 'file' routes there
